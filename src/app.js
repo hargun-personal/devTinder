@@ -6,12 +6,14 @@ app.use("/hello",(req, res) => {
     res.send("hello from the server !");
 })
 
-app.use("/test", (req, res) => {
-    res.send('Test routes working');
+app.get('/test', (req, res) => {
+    console.log(req.query);
+    res.send("Test Routes works")
 })
 
-app.use("/", (req, res) => {
-    res.send("Dashboard is working");
+app.post('/test/:id/:base/:room', (req, res) => {
+    console.log(req.params);
+    res.send("Post req sent works")
 })
 
 app.listen(8888, ()=> {
