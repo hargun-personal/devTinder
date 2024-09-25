@@ -2,9 +2,29 @@ const express = require('express');
 
 const app = express();
 
-app.use("/hello",(req, res) => {
-    res.send("hello from the server !");
-})
+app.use("/hello",
+
+[(req, res, next) => {
+    console.log("Handling route 1");
+    next();
+    // res.send("Response 1 !");
+},
+(req, res, next) => {
+    console.log("Handling route 2");
+    // res.send("Response 2 !");
+    next();
+}],
+(req, res, next) => {
+    console.log("Handling route 3");
+    // res.send("Response 3 !");
+    next();
+},
+[(req, res, next) => {
+    console.log("Handling route 4");
+    res.send("Response 4 !");
+    // next();
+}]
+)
 
 app.get('/test', (req, res) => {
     console.log(req.query);
